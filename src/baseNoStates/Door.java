@@ -3,14 +3,35 @@ package baseNoStates;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
+//He afegit atributs state, per saber l'estat de la porta(unlocked,locked, unlocked_shortly)
+//També he afegit els atributs from i to per que la porta tingui la informació de quin space ve i a quin space dona.
 public class Door {
   private final String id;
   private boolean closed; // physically
+  private String state;
+  private String from;
+  private String to;
 
-  public Door(String id) {
+
+  public Door(String id, String state,  String from, String to) {
     this.id = id;
+    this.state = state;
     closed = true;
+    this.from = from;
+    this.to = to;
+
+  }
+
+
+  public String getFrom() {
+    return from;
+  }
+
+  public String getTo() {
+    return to;
   }
 
   public void processRequest(RequestReader request) {
@@ -25,6 +46,8 @@ public class Door {
     request.setDoorStateName(getStateName());
   }
 
+
+  //Això s'ha de refactoritzar amb l'explicació del pdf de la sessió 1
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
@@ -44,17 +67,58 @@ public class Door {
       case Actions.LOCK:
         // TODO
         // fall through
+        if(closed) {
+          state = "locked";
+        }
+        break;
+
       case Actions.UNLOCK:
         // TODO
         // fall through
+        if(closed) {
+          closed = false;
+        }
+        state = "unlocked";
+        break;
+
       case Actions.UNLOCK_SHORTLY:
         // TODO
-        System.out.println("Action " + action + " not implemented yet");
+        // fall through
+        if (state.equals("locked")) {
+          state = "unlocked_shortly";
+          Timer timer = new Timer();
+          TimerTask task = new TimerTask() {
+            int sec = 0;
+
+            public void run() {
+              sec++;
+              System.out.println("There are " + (10 - sec) + "seconds left to lock de door");
+              if (sec == 10) {
+                if (closed){
+                  state = "locked";
+                }
+                else{
+                  state = "propped";
+                }
+                timer.cancel();
+                System.out.println("Locking...");
+              }
+
+            }
+          };
+          timer.scheduleAtFixedRate(task, 0, 1000);
+        }
+        else{
+          state = "unlocked";
+          System.out.println("Can't unlock door  " + id + " shortly because it's not closed or it's already unlocked");
+        }
+
         break;
       default:
         assert false : "Unknown action " + action;
         System.exit(-1);
     }
+
   }
 
   public boolean isClosed() {
@@ -66,7 +130,7 @@ public class Door {
   }
 
   public String getStateName() {
-    return "unlocked";
+    return state;
   }
 
   @Override
