@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1d075212-7615-46ba-a0b4-eb3d0bbe82ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Locked.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Propped.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/States.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Unlocked.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Unlocked_shortly.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Door.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="32as67D9jkpEqgRChASOUBYGlBW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.base.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JavaScript Debug.building.html.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.building.js.executor&quot;: &quot;Debug&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/siraj/IdeaProjects/acs_students&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/siraj/IdeaProjects/acs_students/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\siraj\IdeaProjects\acs_students\.gitignore" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.base.Main">
+    <configuration name="base.Main" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.2+12-54" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="baseNoStates.Main" />
+      <module name="acs_students" />
+      <option name="PROGRAM_PARAMETERS" value="base.Main" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="baseNoStates.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="building.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/acs_students/simulator/building.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="building.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/simulator/building.js" working-dir="$PROJECT_DIR$/src/simulator">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.base.Main" />
+      <item itemvalue="JavaScript Debug.building.html" />
+      <item itemvalue="Node.js.building.js" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.base.Main" />
+        <item itemvalue="Node.js.building.js" />
+        <item itemvalue="JavaScript Debug.building.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1d075212-7615-46ba-a0b4-eb3d0bbe82ea" name="Changes" comment="" />
+      <created>1757669839312</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1757669839312</updated>
+      <workItem from="1757669840644" duration="1878000" />
+      <workItem from="1757671742968" duration="894000" />
+      <workItem from="1757672688705" duration="71000" />
+      <workItem from="1757672782237" duration="493000" />
+      <workItem from="1757673291862" duration="1090000" />
+      <workItem from="1757731466178" duration="14259000" />
+      <workItem from="1757859007527" duration="65000" />
+      <workItem from="1757927409471" duration="10313000" />
+      <workItem from="1758018334446" duration="13226000" />
+      <workItem from="1758377548884" duration="23000" />
+      <workItem from="1758394618056" duration="52000" />
+      <workItem from="1758394698299" duration="4000" />
+      <workItem from="1758479816586" duration="25000" />
+      <workItem from="1758490005174" duration="3000" />
+      <workItem from="1758534277851" duration="1980000" />
+      <workItem from="1758654862690" duration="1830000" />
+      <workItem from="1759065352593" duration="62000" />
+      <workItem from="1759065422478" duration="22000" />
+      <workItem from="1759065458932" duration="56000" />
+      <workItem from="1759065524599" duration="844000" />
+      <workItem from="1759066440220" duration="698000" />
+      <workItem from="1759067156796" duration="12185000" />
+      <workItem from="1759141734536" duration="673000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
