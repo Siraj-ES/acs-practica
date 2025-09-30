@@ -20,6 +20,7 @@ public class Propped extends DoorState{
     @Override
     public void close() {
       door.setClosed(true);
+      door.setState(new Locked(door));
     }
 
     @Override

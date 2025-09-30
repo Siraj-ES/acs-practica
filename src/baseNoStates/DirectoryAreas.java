@@ -22,16 +22,22 @@ public class DirectoryAreas {
     Area room2 = new Space("room2");
     Area hall = new Space("hall");
     Area restroom = new Space("rest room");
-    Area building = new Space("building");
-    Area exterior = new Space("exterior");
+    Area building = new Partition("building");
+    Area exterior = new Partition("exterior");
     Area room3 = new Space("room3");
     Area IT = new Space("IT");
     Area corridor = new Space("corridor");
-    Partition basement = new Partition("basement");
-    Partition groundFloor = new Partition("ground_floor");
-    Partition floor1 = new Partition("floor1");
+    Area basement = new Partition("basement");
+    Area groundFloor = new Partition("ground_floor");
+    Area floor1 = new Partition("floor1");
 
     allAreas = new ArrayList<>(Arrays.asList(parking, stairs, room1, room2, hall, restroom, building, exterior, room3, IT, corridor, basement, groundFloor, floor1));
+
+    building.addArea(groundFloor);
+    building.addArea(floor1);
+    building.addArea(basement);
+
+
     basement.addArea(parking);
 
     groundFloor.addArea(room1);

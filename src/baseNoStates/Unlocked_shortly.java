@@ -13,10 +13,16 @@ public class Unlocked_shortly extends DoorState{
 
 
   @Override
-    public void open(){}
+    public void open(){
+      door.setClosed(false);
+      System.out.println("Opening the door...");
+  }
 
     @Override
-    public void close(){}
+    public void close(){
+      door.setClosed(true);
+      System.out.println("Closing the door");
+    }
 
     @Override
     public void lock(){}

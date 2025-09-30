@@ -14,6 +14,8 @@ public abstract class Area {
     return id;
   }
 
+  public abstract void addArea(Area area);
+
   public abstract List<Door> getDoorsGivingAccess();
 }
 
