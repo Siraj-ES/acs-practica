@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d075212-7615-46ba-a0b4-eb3d0bbe82ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Clock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Observable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Door.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Door.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DoorState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DoorState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Area.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Partition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Propped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Propped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Locked.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Locked.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Partition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Unlocked.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Unlocked.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Locked.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Locked.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Unlocked.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Unlocked.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Unlocked_shortly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Unlocked_shortly.java" afterDir="false" />
     </list>
@@ -105,14 +111,10 @@
     </configuration>
     <list>
       <item itemvalue="Application.base.Main" />
-      <item itemvalue="JavaScript Debug.building.html" />
-      <item itemvalue="Node.js.building.js" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.base.Main" />
-        <item itemvalue="Node.js.building.js" />
-        <item itemvalue="JavaScript Debug.building.html" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +122,6 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -155,6 +156,9 @@
       <workItem from="1759067156796" duration="12185000" />
       <workItem from="1759141734536" duration="2673000" />
       <workItem from="1759217646446" duration="2525000" />
+      <workItem from="1759221061797" duration="181000" />
+      <workItem from="1759744721424" duration="6347000" />
+      <workItem from="1759875726276" duration="50000" />
     </task>
     <servers />
   </component>

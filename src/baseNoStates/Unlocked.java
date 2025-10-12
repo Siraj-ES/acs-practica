@@ -9,7 +9,7 @@ public class Unlocked extends DoorState{
 
   @Override
   public String getName() {
-    return "unlocked";
+    return States.UNLOCKED;
   }
 
 

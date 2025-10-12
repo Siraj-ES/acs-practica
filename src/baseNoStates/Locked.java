@@ -12,7 +12,7 @@ public class Locked extends DoorState {
 
     @Override
     public String getName() {
-      return "locked";
+      return States.LOCKED;
     }
 
     @Override
@@ -37,8 +37,13 @@ public class Locked extends DoorState {
 
     @Override
     public void unlocked_shortly() {
+      Clock clock = door.getClock();
+      Unlocked_shortly unlocked_shortly = new Unlocked_shortly(door, clock);
+      door.setState(unlocked_shortly);
 
-      door.setState(new Unlocked_shortly(door));
+
+
+      /*
       Timer timer = new Timer();
       TimerTask task = new TimerTask() {
         int sec = 0;
@@ -61,6 +66,8 @@ public class Locked extends DoorState {
         }
       };
       timer.scheduleAtFixedRate(task, 0, 1000);
+
+       */
 
     }
 

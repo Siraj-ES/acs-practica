@@ -14,9 +14,10 @@ public class Door {
     private DoorState state;
     private String from;
     private String to;
+    private Clock clock;
 
 
-    public Door(String id, String from, String to) {
+    public Door(String id, String from, String to, Clock clock) {
       this.id = id;
       closed = true;
       this.from = from;
@@ -24,7 +25,7 @@ public class Door {
       this.state = new Unlocked(this); //Inicialitzo l'estat de la porta en el constructor a Unlocked.
       //No fa falta pasarli per parametre state per a que sigui més fácil la creació de portes a makeDoors dins
       //DirectoryDoors.
-
+      this.clock = clock;
     }
 
 
@@ -131,6 +132,10 @@ public class Door {
       return state.getName();
     }
 
+    public DoorState getState() {
+      return this.state;
+    }
+
     public void setState(DoorState state) {
       this.state = state;
     }
@@ -150,5 +155,10 @@ public class Door {
       json.put("state", getStateName());
       json.put("closed", closed);
       return json;
+    }
+
+
+    public Clock getClock() {
+      return clock;
     }
 }

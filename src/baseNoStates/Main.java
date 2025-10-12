@@ -5,9 +5,13 @@ package baseNoStates;
 
 public class Main {
   public static void main(String[] args) {
-    DirectoryDoors.makeDoors();
+    //Make a clock and start it.
+    Clock clock = new Clock(1);
+    clock.start();
+    DirectoryDoors.makeDoors(clock);
     DirectoryAreas.makeAllAreas();
     DirectoryUsers.makeUsers();
+
     new WebServer();
   }
 }
