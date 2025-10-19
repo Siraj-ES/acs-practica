@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 
-public class Observable {
+public abstract class Observable {
     private List<Observer> observers = new ArrayList<Observer>();
 
 

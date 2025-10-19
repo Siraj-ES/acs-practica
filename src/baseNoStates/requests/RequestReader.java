@@ -1,11 +1,13 @@
 package baseNoStates.requests;
 
-import baseNoStates.DirectoryDoors;
-import baseNoStates.DirectoryUsers;
-import baseNoStates.Door;
-import baseNoStates.User;
+import baseNoStates.*;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,15 +54,15 @@ public class RequestReader implements Request {
       userName = "unknown";
     }
     return "Request{"
-            + "credential=" + credential
-            + ", userName=" + userName
-            + ", action=" + action
-            + ", now=" + now
-            + ", doorID=" + doorId
-            + ", closed=" + doorClosed
-            + ", authorized=" + authorized
-            + ", reasons=" + reasons
-            + "}";
+        + "credential=" + credential
+        + ", userName=" + userName
+        + ", action=" + action
+        + ", now=" + now
+        + ", doorID=" + doorId
+        + ", closed=" + doorClosed
+        + ", authorized=" + authorized
+        + ", reasons=" + reasons
+        + "}";
   }
 
   public JSONObject answerToJson() {
@@ -93,12 +95,65 @@ public class RequestReader implements Request {
   private void authorize(User user, Door door) {
     if (user == null) {
       authorized = false;
-      addReason("user doesn't exists");
-    } else {
-      //TODO: get the who, where, when and what in order to decide, and if not
-      // authorized add the reason(s)
-      authorized = true;
+      addReason("User doesn't exist");
+      return;
     }
+
+    UserGroup userGroup = user.getUserGroup();
+    if (userGroup == null) {
+      authorized = false;
+      addReason("User has no group assigned");
+      return;
+    }
+    // Get schedule info
+    Shedule schedule = userGroup.getShedule();
+    LocalDateTime now = Clock.getInstance().getDate();
+    LocalDate currentDate = now.toLocalDate();
+    LocalTime currentTime = now.toLocalTime();
+    DayOfWeek currentDay = now.getDayOfWeek();
+
+    //Check valid day
+    if (schedule.getValidDays() == null || !schedule.getValidDays().contains(currentDay)) {
+      authorized = false;
+      addReason("Not a valid day for this group");
+      return;
+    }
+    //Check date range
+    if (currentDate.isBefore(schedule.getStartDate()) || currentDate.isAfter(schedule.getEndDate())) {
+      authorized = false;
+      addReason("Date not within schedule");
+      return;
+    }
+
+    //Check hour range
+    if (currentTime.isBefore(schedule.getStartHour()) || currentTime.isAfter(schedule.getEndHour())) {
+      authorized = false;
+      addReason("Time not within schedule");
+      return;
+    }
+
+    // Check door access
+    boolean doorAllowed = false;
+    for (Area area : userGroup.getAllowedAreas()) {
+      if (area.getDoorsGivingAccess().contains(door)) {
+        doorAllowed = true;
+        break;
+      }
+    }
+    if (!doorAllowed) {
+      authorized = false;
+      addReason("Door not allowed for this group");
+      return;
+    }
+
+    // Check allowed action
+    if (!userGroup.getAllowedActions().contains(action)) {
+      authorized = false;
+      addReason("Action not allowed for this group");
+      return;
+    }
+
+
+    authorized = true;
   }
 }
-

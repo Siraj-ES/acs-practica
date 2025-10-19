@@ -8,7 +8,7 @@ public class Clock extends Observable {
   private LocalDateTime date;
   private Timer timer;
   private int period; // interval in seconds
-
+  private static Clock instance;
 
   public Clock(int period) {
     this.period = period;
@@ -27,7 +27,7 @@ public class Clock extends Observable {
       }
     };
 
-    timer.scheduleAtFixedRate(repeatedTask, 0, 1000L* period);
+    timer.scheduleAtFixedRate(repeatedTask, 0, 1000* period);
   }
 
   public void stop() {
@@ -36,6 +36,14 @@ public class Clock extends Observable {
 
   public int getPeriod() {
     return period;
+  }
+
+  public static Clock getInstance(){
+    if(instance == null){
+      instance = new Clock(1);
+      return instance;
+    }
+    return instance;
   }
 
 

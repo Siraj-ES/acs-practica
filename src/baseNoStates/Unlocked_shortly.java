@@ -1,5 +1,7 @@
 package baseNoStates;
 
+import java.time.LocalDateTime;
+
 public class Unlocked_shortly extends DoorState implements Observer {
     private int sec;
     private Clock clock;
@@ -9,6 +11,12 @@ public class Unlocked_shortly extends DoorState implements Observer {
       this.clock = clock;
       this.clock.addObserver(this);
       this.sec = 0;
+      Clock.getInstance().addObserver(this );
+
+      name = States.UNLOCKED_SHORTLY;
+      LocalDateTime dateTimeUnlocked = LocalDateTime.now();
+      Clock.getInstance().addObserver(this);
+      System.out.println("Door " + this.door.getId() + " enters Unlocked shortly at " + dateTimeUnlocked);
     }
 
   @Override
