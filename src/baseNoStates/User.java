@@ -15,9 +15,6 @@ public class User {
     return credential;
   }
 
-  public String getName() {
-    return name;
-  }
 
   @Override
   public String toString() {
@@ -30,6 +27,10 @@ public class User {
 
   public UserGroup getUserGroup() {
     return this.userGroup;
+  }
+
+  public String getName() {
+    return name;
   }
 
 }

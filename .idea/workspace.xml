@@ -5,22 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d075212-7615-46ba-a0b4-eb3d0bbe82ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryUserGroups.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Shedule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authors.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/FindAreaById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/GetDoorsGivingAcces.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Visitable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/Visitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acs_students.iml" beforeDir="false" afterPath="$PROJECT_DIR$/acs_students.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Area.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Area.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Clock$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Clock$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Clock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Clock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryAreas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryAreas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryDoors$DirectoryAreas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryDoors.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryDoors.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryUserGroups.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryUserGroups.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DirectoryUsers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Door.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Door.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DoorState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/DoorState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Locked.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Locked.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Observable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Observable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/States.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/States.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Partition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Propped.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Propped.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Shedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Shedule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Space.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Space.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Unlocked.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Unlocked.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Unlocked_shortly.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/Unlocked_shortly.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/UserGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/UserGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/WebServer$SocketThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/WebServer$SocketThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/WebServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/WebServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/requests/RequestArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/requests/RequestArea.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/requests/RequestReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/requests/RequestReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/uml/base_no_states.puml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/acs_students/baseNoStates/uml/base_no_states.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Area.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Clock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Clock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryUserGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryUserGroups.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Locked.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Locked.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Observable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Observable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/States.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/States.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Propped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Propped.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Shedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Shedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Unlocked.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Unlocked.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Unlocked_shortly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Unlocked_shortly.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/WebServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/WebServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/requests/RequestArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/requests/RequestArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/requests/RequestReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/requests/RequestReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +81,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -72,11 +115,11 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/siraj/IdeaProjects/acs_students/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JAVA&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>

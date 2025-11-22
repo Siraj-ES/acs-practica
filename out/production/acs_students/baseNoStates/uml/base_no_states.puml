@@ -1,81 +1,280 @@
 @startuml
-'https://plantuml.com/class-diagram
+
+
 skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam arrowThickness 1.2
+skinparam classFontSize 12
+skinparam classFontStyle bold
 
-class Webserver {
-- {static} PORT :int
-- {static} FORMATTER : DateTimeFormatter
-+ Webserver()
-}
-
-class SocketThread {
-- insocked : Socked
-- makeRequest(tokens : String[]) : Request
-- makeRequestReader(tokens : String[]) : RequestReader
-- makeRequestArea(tokens : String[]) : RequestArea
-- makeHeaderAnswer() : String
-- makeJsonAnswer(request : Request) : String
-+ run()
-}
-
-Webserver +-right- SocketThread
-
-note right of SocketThread
-inner class
-of Webserver
-end note
-
-class DirectoryDoors {
-- {static} allDoors : Door[]
-+ {static} makeDoors()
-+ {static} findDoorById(id : String) : Door
-+ {static} getAllDoors() : Door[]
-}
-
-DirectoryDoors --> "*" Door : "allDoors"
-
-class DirectoryUsers {
-- {static} users : User[]
-+ {static} makeUsers()
-+ {static} findUserByCredential(credential : String) : User
-}
-
-DirectoryUsers --> "*" User : "users"
-
-class Door {
-- id : String
-- closed : boolean
-+ Door(id : String)
-+ processRequest(request : RequestReader)
-+ setState(doorState : DoorState)
-+ toJson() : JSONObject
-'+ toString() : String
-'+ isClosed() :boolean
-'+ setClosed(b : boolean)
-'+ getStateName() : String
-- doAction(action : String)
-}
-
-
-class User {
-- name : String
-- credential : String
-+ User(name: String, credential: String)
-+ toString() : String
-}
-
-
+' ========= MAIN ==========
 class Main {
-+ {static} main(args : String)
+  + {static} main(args : String[])
 }
 
 note right of Main::main
-DirectoryDoors.makeDoors()
-DiretoryUsers.makeUsers()
-new Webserver()
+Crea Clock y lo inicia.
+Construye DirectoryDoors, DirectoryAreas, DirectoryUsers.
+Inicia WebServer.
 end note
 
-Main -[hidden]down- Webserver
-Webserver -[hidden]down- DirectoryDoors
-DirectoryDoors -[hidden]right- DirectoryUsers
+' ========= WEBSERVER ==========
+class WebServer {
+  - {static} PORT : int
+  - {static} formatter : DateTimeFormatter
+  + WebServer()
+}
+
+class SocketThread {
+  - insocked : Socket
+  + run()
+  - makeRequest(tokens : String[]) : Request
+  - makeRequestReader(tokens : String[]) : RequestReader
+  - makeRequestArea(tokens : String[]) : RequestArea
+  - makeJsonAnswer(request : Request) : String
+}
+
+WebServer *-- SocketThread : "1..*"
+
+note right of SocketThread
+Hilo interno que gestiona cada conexión HTTP.
+Crea Request según tipo (reader, area, refresh).
+end note
+
+
+' ========= REQUESTS ==========
+abstract class Request {
+  + process()
+  + answerToJson() : JSONObject
+}
+
+class RequestReader {
+  - credential : String
+  - action : String
+  - dateTime : LocalDateTime
+  - doorId : String
+  - authorized : boolean
+  - reasons : List<String>
+  + process()
+  + answerToJson() : JSONObject
+}
+
+class RequestArea {
+  - credential : String
+  - action : String
+  - dateTime : LocalDateTime
+  - areaId : String
+  - requestsDoors : List<RequestReader>
+  + process()
+  + answerToJson() : JSONObject
+}
+
+class RequestRefresh {
+  + process()
+  + answerToJson() : JSONObject
+}
+
+Request <|-- RequestReader
+Request <|-- RequestArea
+Request <|-- RequestRefresh
+
+RequestReader --> Door
+RequestReader --> User
+RequestArea --> Area
+RequestArea --> "*" RequestReader
+
+
+' ========= AREAS ==========
+abstract class Area {
+  - id : String
+  + getId() : String
+  + addArea(area : Area)
+  + getDoorsGivingAccess() : List<Door>
+}
+
+class Partition {
+  - children : ArrayList<Area>
+  + addArea(area : Area)
+  + getDoorsGivingAccess() : List<Door>
+}
+
+class Space {
+  + getDoorsGivingAccess() : List<Door>
+}
+
+Area <|-- Partition
+Area <|-- Space
+
+
+Space --> DirectoryDoors : "usa getAllDoors()"
+
+
+' ========= DOORS ==========
+class Door {
+  - id : String
+  - closed : boolean
+  - from : String
+  - to : String
+  - state : DoorState
+  - clock : Clock
+  + processRequest(request : RequestReader)
+  - doAction(action : String)
+  + getStateName() : String
+  + setState(state : DoorState)
+  + toJson() : JSONObject
+  + isClosed() : boolean
+  + setClosed(b : boolean)
+}
+
+class DoorState {
+  # door : Door
+  # name : String
+  + getName() : String
+  + open()
+  + close()
+  + lock()
+  + unlock()
+  + unlocked_shortly()
+  + propped()
+}
+
+DoorState <|-- Locked
+DoorState <|-- Unlocked
+DoorState <|-- Unlocked_shortly
+DoorState <|-- Propped
+
+Door --> DoorState
+Door --> Clock
+
+class Locked
+class Unlocked
+class Unlocked_shortly {
+  - sec : int
+  - clock : Clock
+  + update()
+}
+class Propped
+
+Unlocked_shortly ..|> Observer
+Clock --> Unlocked_shortly : notifica
+
+
+' ========= CLOCK / OBSERVER ==========
+class Clock {
+  - date : LocalDateTime
+  - timer : Timer
+  - period : int
+  - {static} instance : Clock
+  + start()
+  + stop()
+  + getDate() : LocalDateTime
+  + getInstance() : Clock
+}
+Clock --|> Observable
+
+class Observable {
+  - observers : List<Observer>
+  + addObserver(o : Observer)
+  + removeObserver(o : Observer)
+  + notifyObservers()
+}
+
+interface Observer {
+  + update()
+}
+
+
+' ========= USERS ==========
+class User {
+  - name : String
+  - credential : String
+  - userGroup : UserGroup
+  + getCredential() : String
+  + getName() : String
+  + setUserGroup(g : UserGroup)
+}
+
+class UserGroup {
+  - name : String
+  - users : List<User>
+  - allowedAreas : List<Area>
+  - allowedActions : List<String>
+  - shedule : Shedule
+  + getAllowedActions() : List<String>
+  + getAllowedAreas() : List<Area>
+  + getShedule() : Shedule
+}
+
+class Shedule {
+  - validDays : Set<DayOfWeek>
+  - startHour : LocalTime
+  - endHour : LocalTime
+  - startDate : LocalDate
+  - endDate : LocalDate
+  + getNow() : LocalDateTime
+}
+
+User --> UserGroup
+UserGroup --> Area
+UserGroup --> Shedule
+
+
+' ========= DIRECTORIES ==========
+class DirectoryDoors {
+  - {static} allDoors : ArrayList<Door>
+  + {static} makeDoors(clock : Clock)
+  + {static} findDoorById(id : String) : Door
+  + {static} getAllDoors() : ArrayList<Door>
+}
+DirectoryDoors *-- Door
+
+class DirectoryAreas {
+  - {static} allAreas : ArrayList<Area>
+  + {static} makeAllAreas()
+  + {static} findAreaById(id : String) : Area
+}
+DirectoryAreas *-- Area
+
+class DirectoryUserGroups {
+  - {static} userGroups : List<UserGroup>
+  + {static} makeUserGroups()
+  + {static} findUserGroupByName(name : String) : UserGroup
+}
+DirectoryUserGroups *-- UserGroup
+
+class DirectoryUsers {
+  - {static} users : ArrayList<User>
+  + {static} makeUsers()
+  + {static} findUserByCredential(credential : String) : User
+}
+DirectoryUsers *-- User
+DirectoryUsers --> DirectoryUserGroups
+DirectoryUserGroups --> DirectoryAreas
+DirectoryDoors --> Clock
+
+
+' ========= UTILITY ==========
+class Actions {
+  + {static} LOCK : String
+  + {static} UNLOCK : String
+  + {static} UNLOCK_SHORTLY : String
+  + {static} OPEN : String
+  + {static} CLOSE : String
+}
+
+class States {
+  + {static} LOCKED : String
+  + {static} UNLOCKED : String
+  + {static} UNLOCKED_SHORTLY : String
+}
+
+' ========= RELACIONES DE ALTO NIVEL ==========
+Main --> WebServer
+WebServer --> Request
+RequestReader --> DirectoryUsers
+RequestReader --> DirectoryDoors
+RequestArea --> DirectoryAreas
+RequestRefresh --> DirectoryDoors
+DirectoryUsers --> DirectoryUserGroups
+
 @enduml

@@ -1,10 +1,9 @@
 package baseNoStates;
 
 import baseNoStates.requests.Request;
+import baseNoStates.requests.RequestArea;
 import baseNoStates.requests.RequestReader;
 import baseNoStates.requests.RequestRefresh;
-import baseNoStates.requests.RequestArea;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,20 +12,40 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 // Based on
 // https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java
 // http://www.jcgonzalez.com/java-socket-mini-server-http-example
+
+/*
+  HTTP server that acts as a connector between the client (simulator)
+  and the ACS model. It listens for GET requests on port 8080 and translates them
+  into Request objects that can be RequestReader, RequestArea or RequestRefresh.
+
+  Each incoming connection is handled in a SocketThread
+  that reads the request line, manually parses the parameters, and
+  builds the appropriate Request.
+  Once the Request is created, the server delegates its processing to the process() method of the Request itself,
+  converts the response to JSON using answerToJson(), and sends this JSON as the HTTP response.
+ */
+
 public class WebServer {
+  private static final Logger log = LoggerFactory.getLogger(WebServer.class);
+
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter formatter =
-          DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+      DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
   public WebServer() {
     try {
       ServerSocket serverConnect = new ServerSocket(PORT);
-      System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
+      log.info("Server started. Listening for connections on port {} ...", PORT);
       // we listen until user halts server execution
       while (true) {
         // each client connection will be managed in a dedicated Thread
@@ -34,13 +53,18 @@ public class WebServer {
         // create dedicated thread to manage the client connection
       }
     } catch (IOException e) {
-      System.err.println("Server Connection error : " + e.getMessage());
+      log.error("Server Connection error : {}", e.getMessage());
     }
   }
 
 
-  private class SocketThread extends Thread {
+
+
+
+  private static class SocketThread extends Thread {
     // as an inner class, SocketThread sees WebServer attributes
+    private static final Logger log = LoggerFactory.getLogger(SocketThread.class);
+
     private final Socket insocked; // client connection via Socket class
 
     SocketThread(Socket insocket) {
@@ -64,25 +88,25 @@ public class WebServer {
         String input = in.readLine();
         // we parse the request with a string tokenizer
 
-        System.out.println("sockedthread : " + input);
+        log.debug("socketthread : {}", input);
 
         StringTokenizer parse = new StringTokenizer(input);
         String method = parse.nextToken().toUpperCase(); // we get the HTTP method of the client
         if (!method.equals("GET")) {
-          System.out.println("501 Not Implemented : " + method + " method.");
+          log.warn("501 Not Implemented : {} method.", method);
         } else {
           // what comes after "localhost:8080"
           resource = parse.nextToken();
-          System.out.println("input " + input);
-          System.out.println("method " + method);
-          System.out.println("resource " + resource);
+          log.debug("input {}", input);
+          log.debug("method {}", method);
+          log.debug("resource {}", resource);
 
           parse = new StringTokenizer(resource, "/[?]=&");
           int i = 0;
           String[] tokens = new String[20]; // more than the actual number of parameters
           while (parse.hasMoreTokens()) {
             tokens[i] = parse.nextToken();
-            System.out.println(i + " " + tokens[i]);
+            log.debug("{} {}", i, tokens[i]);
             i++;
           }
 
@@ -90,15 +114,17 @@ public class WebServer {
           Request request = makeRequest(tokens);
           if (request != null) {
             String typeRequest = tokens[0];
-            System.out.println("created request " + typeRequest + " " + request);
+            log.info("created request {} {}", typeRequest, request);
             request.process();
-            System.out.println("processed request " + typeRequest + " " + request);
+            log.info("processed request {} {}", typeRequest, request);
             // Make the answer as a JSON string, to be sent to the Javascript client
             String answer = makeJsonAnswer(request);
-            System.out.println("answer\n" + answer);
+            log.debug("answer\n{}", answer);
             // Here we send the response to the client
             out.println(answer);
             out.flush(); // flush character output stream buffer
+
+            WebServer.logs(request);
           }
         }
 
@@ -106,17 +132,17 @@ public class WebServer {
         out.close();
         insocked.close(); // we close socket connection
       } catch (Exception e) {
-        System.err.println("Exception : " + e);
+        log.error("Exception : {}", e.toString());
       }
     }
 
     private Request makeRequest(String[] tokens) {
       // always return request because it contains the answer for the Javascript client
-      System.out.print("tokens : ");
+      log.debug("tokens : ");
       for (String token : tokens) {
-        System.out.print(token + ", ");
+        log.debug("{}, ", token);
       }
-      System.out.println();
+      log.debug("");
 
       Request request;
       // assertions below evaluated to false won't stop the webserver, just print an
@@ -124,15 +150,17 @@ public class WebServer {
       switch (tokens[0]) {
         case "refresh":
           request = new RequestRefresh();
+
           break;
         case "reader":
           request = makeRequestReader(tokens);
           break;
         case "area":
           request = makeRequestArea(tokens);
+
           break;
         case "get_children":
-          //TODO: this is to be implemented when programming the mobile app in Flutter
+          // TODO: this is to be implemented when programming the mobile app in Flutter
           // in order to navigate the hierarchy of partitions, spaces and doors
           assert false : "request get_children is not yet implemented";
           request = null;
@@ -182,5 +210,61 @@ public class WebServer {
     }
 
   }
+
+
+  public static void logs(Request request) {
+
+    if (request instanceof RequestRefresh) {
+      log.info("refresh");
+    }
+
+    if (request instanceof RequestReader) {
+      RequestReader rr = (RequestReader) request;
+
+      log.info(
+          "RequestReader\n"
+              + "userName " + rr.getUserName() + "\n"
+              + "action " + rr.getAction() + "\n"
+              + "datetime " + rr.getNow() + "\n"
+              + "doorId " + rr.getDoorId() + "\n"
+              + "authorized " + rr.isAuthorized() + "\n"
+              + "reasons " + rr.getReasons()
+      );
+    }
+
+    if (request instanceof RequestArea) {
+      RequestArea ra = (RequestArea) request;
+
+      // usuari pel log (simple, sense comprovar res)
+      User u = DirectoryUsers.findUserByCredential(ra.getCredential());
+      String name = u.getName();
+
+      // area està autoritzada si totes les portes ho estan
+      boolean authorized = true;
+      for (RequestReader rr : ra.getRequests()) {
+        if (!rr.isAuthorized()) {
+          authorized = false;
+          break;
+        }
+      }
+
+      // concatenar els motius tal com són (simple)
+      ArrayList<String> all = new ArrayList<>();
+      for (RequestReader rr : ra.getRequests()) {
+        all.addAll(rr.getReasons());
+      }
+
+      log.info(
+          "RequestArea\n"
+              + "userName " + name + "\n"
+              + " action " + ra.getAction() + "\n"
+              + " datetime " + ra.getNow() + "\n"
+              + "areaId " + ra.getAreaId() + "\n"
+              + " authorized " + authorized + "\n"
+              + " reasons " + all
+      );
+    }
+  }
+
 
 }

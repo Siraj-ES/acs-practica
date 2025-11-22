@@ -1,41 +1,47 @@
 package baseNoStates;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class Propped extends DoorState {
 
-public class Propped extends DoorState{
-    public Propped(Door door) {
-      super(door);
-    }
+  private static final Logger log = LoggerFactory.getLogger(Propped.class);
 
-    @Override
-    public String getName() {
-      return "propped";
-    }
+  public Propped(Door door) {
+    super(door);
+  }
 
-    @Override
-    public void open() {
-      System.out.println("Door is already opened");
-    }
+  @Override
+  public String getName() {
+    return "propped";
+  }
 
-    @Override
-    public void close() {
-      door.setClosed(true);
-      door.setState(new Locked(door));
-    }
+  @Override
+  public void open() {
+    log.warn(
+        "Door {} is already opened (PROPPED state)",
+        door.getId()
+    );
+  }
 
-    @Override
-    public void lock() {
-      door.setState(new Locked(door));
-    }
+  @Override
+  public void close() {
+    door.setClosed(true);
+    door.setState(new Locked(door));
+  }
 
-    @Override
-    public void unlock() {}
+  @Override
+  public void lock() {
+    door.setState(new Locked(door));
+  }
 
-    @Override
-    public void unlocked_shortly() {}
+  @Override
+  public void unlock() {
+    // No action in PROPPED state
+  }
 
-    @Override
-    public void propped() {}
-
-
+  @Override
+  public void unlocked_shortly() {
+    // No action in PROPPED state
+  }
 }

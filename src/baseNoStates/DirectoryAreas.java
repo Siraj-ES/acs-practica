@@ -6,16 +6,14 @@ import java.util.Arrays;
 
 
 public class DirectoryAreas {
-  private String id;
+
   private static ArrayList<Area> allAreas;
 
-  public DirectoryAreas(String id, ArrayList<Area> allAreas) {
-    this.id = id;
-    this.allAreas = allAreas;
-  }
+
 
 
   public static void makeAllAreas() {
+
     Area parking = new Space("parking");
     Area stairs = new Space("stairs");
     Area room1 = new Space("room1");
@@ -25,13 +23,18 @@ public class DirectoryAreas {
     Area building = new Partition("building");
     Area exterior = new Partition("exterior");
     Area room3 = new Space("room3");
-    Area IT = new Space("IT");
+    Area it = new Space("IT");
     Area corridor = new Space("corridor");
     Area basement = new Partition("basement");
     Area groundFloor = new Partition("ground_floor");
     Area floor1 = new Partition("floor1");
 
-    allAreas = new ArrayList<>(Arrays.asList(parking, stairs, room1, room2, hall, restroom, building, exterior, room3, IT, corridor, basement, groundFloor, floor1));
+    allAreas = new ArrayList<>(Arrays.asList(
+        parking, stairs, room1, room2, hall, restroom,
+        building, exterior, room3, it, corridor,
+        basement, groundFloor, floor1
+    ));
+
 
     building.addArea(groundFloor);
     building.addArea(floor1);
@@ -46,18 +49,21 @@ public class DirectoryAreas {
 
     floor1.addArea(room3);
     floor1.addArea(corridor);
-    floor1.addArea(IT);
+    floor1.addArea(it);
   }
 
 
-  public static Area findAreaById(String areaId) {
-    for (Area area : allAreas) {
-      if (area.getId().equals(areaId)) {
-        return area;
-      }
+  public static Area findAreaById(String id) {
+    FindAreaById v = new FindAreaById(id);
 
+    for (Area a : allAreas) {
+      a.accept(v);
+      if (v.getArea() != null) {
+        return v.getArea();
+      }
     }
     return null;
   }
+
 
 }

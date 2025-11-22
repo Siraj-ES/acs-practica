@@ -4,32 +4,41 @@ import baseNoStates.Actions;
 import baseNoStates.Area;
 import baseNoStates.DirectoryAreas;
 import baseNoStates.Door;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+/*
+  This class represents an action request applied to an entire area
+  (maybe a space or a partition). The access control system cannot act directly
+  on an area, so RequestArea is responsible for converting this
+  abstract request into multiple individual requests on each door that
+  provides access to the spaces of the area.
 
+  When a user requests to lock or unlock an area, this class:
+  -locates the area in the model
+  -obtains all the doors associated with it
+  -creates a RequestReader for each door
+  -processes each of these requests.
+*/
 
 public class RequestArea implements Request {
   private final String credential;
   private final String action;
   private final String areaId;
   private final LocalDateTime now;
-  private ArrayList<RequestReader> requests = new ArrayList<>();
-
+  private final ArrayList<RequestReader> requests = new ArrayList<>();
 
   public RequestArea(String credential, String action, LocalDateTime now, String areaId) {
     this.credential = credential;
     this.areaId = areaId;
+
     assert action.equals(Actions.LOCK) || action.equals(Actions.UNLOCK)
-            : "invalid action " + action + " for an area request";
+        : "invalid action " + action + " for an area request";
+
     this.action = action;
     this.now = now;
-  }
-
-  public String getAction() {
-    return action;
   }
 
   @Override
@@ -37,57 +46,67 @@ public class RequestArea implements Request {
     JSONObject json = new JSONObject();
     json.put("action", action);
     json.put("areaId", areaId);
+
+    // Convertim totes les respostes de les peticions individuals de porta a JSON
     JSONArray jsonRequests = new JSONArray();
     for (RequestReader rd : requests) {
       jsonRequests.put(rd.answerToJson());
     }
     json.put("requestsDoors", jsonRequests);
-    //json.put("todo", "request areas not yet implemented");
+
     return json;
   }
 
   @Override
   public String toString() {
     String requestsDoorsStr;
-    if (requests.size() == 0) {
+    if (requests.isEmpty()) {
       requestsDoorsStr = "";
     } else {
       requestsDoorsStr = requests.toString();
     }
     return "Request{"
-            + "credential=" + credential
-            + ", action=" + action
-            + ", now=" + now
-            + ", areaId=" + areaId
-            + ", requestsDoors=" + requestsDoorsStr
-            + "}";
+        + "credential=" + credential
+        + ", action=" + action
+        + ", now=" + now
+        + ", areaId=" + areaId
+        + ", requestsDoors=" + requestsDoorsStr
+        + "}";
   }
 
-  // processing the request of an area is creating the corresponding door requests and forwarding
-  // them to all of its doors. For some it may be authorized and action will be done, for others
-  // it won't be authorized and nothing will happen to them.
+
+
   public void process() {
-    // commented out until Area, Space and Partition are implemented
 
-
-    // make the door requests and put them into the area request to be authorized later and
-    // processed later
     Area area = DirectoryAreas.findAreaById(areaId);
-    // an Area is a Space or a Partition
-    if (area != null) {
-      // is null when from the app we click on an action but no place is selected because
-      // there (flutter) I don't control like I do in javascript that all the parameters are provided
 
-      // Make all the door requests, one for each door in the area, and process them.
-      // Look for the doors in the spaces of this area that give access to them.
+    if (area != null) {
       for (Door door : area.getDoorsGivingAccess()) {
         RequestReader requestReader = new RequestReader(credential, action, now, door.getId());
         requestReader.process();
-        // after process() the area request contains the answer as the answer
-        // to each individual door request, that is read by the simulator/Flutter app
+
         requests.add(requestReader);
       }
     }
+  }
 
+  public String getCredential() {
+    return credential;
+  }
+
+  public String getAction() {
+    return action;
+  }
+
+  public String getAreaId() {
+    return areaId;
+  }
+
+  public LocalDateTime getNow() {
+    return now;
+  }
+
+  public ArrayList<RequestReader> getRequests() {
+    return requests;
   }
 }

@@ -1,7 +1,11 @@
 package baseNoStates;
 
-public class Unlocked extends DoorState{
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class Unlocked extends DoorState {
+
+  private static final Logger log = LoggerFactory.getLogger(Unlocked.class);
 
   public Unlocked(Door door) {
     super(door);
@@ -12,49 +16,40 @@ public class Unlocked extends DoorState{
     return States.UNLOCKED;
   }
 
-
   @Override
   public void open() {
-    if (door.isClosed()){
+    if (door.isClosed()) {
       door.setClosed(false);
-    }
-    else {
-      System.out.println("Door is already opened");
+    } else {
+      log.warn("Door {} is already opened", door.getId());
     }
   }
 
   @Override
   public void close() {
-    if (!door.isClosed()){
+    if (!door.isClosed()) {
       door.setClosed(true);
-    }
-    else  {
-      System.out.println("Door is already closed");
+    } else {
+      log.warn("Door {} is already closed", door.getId());
     }
   }
 
   @Override
   public void lock() {
-    if(door.isClosed()){
+    if (door.isClosed()) {
       door.setState(new Locked(door));
-
-    }
-    else{
-      System.out.println("You have to close the door to Lock it");
+    } else {
+      log.warn("Cannot lock door {} because it is open", door.getId());
     }
   }
 
   @Override
   public void unlock() {
     door.setState(new Unlocked(door));
-
   }
 
   @Override
   public void unlocked_shortly() {
-    System.out.println("The door is already unlocked");
+    log.warn("Door {} is already unlocked", door.getId());
   }
-
-  @Override
-  public void propped() {}
 }

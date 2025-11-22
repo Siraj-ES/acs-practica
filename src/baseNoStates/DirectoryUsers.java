@@ -1,8 +1,14 @@
 package baseNoStates;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 
 public final class DirectoryUsers {
+
+  private static final Logger log = LoggerFactory.getLogger(DirectoryUsers.class);
+
   private static final ArrayList<User> users = new ArrayList<>();
 
   public static void makeUsers() {
@@ -22,7 +28,6 @@ public final class DirectoryUsers {
     users.add(user1);
     users.add(user2);
 
-
     // employees :
     // Sep. 1 this year to Mar. 1 next year
     // week days 9-17h
@@ -37,7 +42,6 @@ public final class DirectoryUsers {
     users.add(user3);
     users.add(user4);
 
-
     // managers :
     // Sep. 1 this year to Mar. 1 next year
     // week days + saturday, 8-20h
@@ -51,7 +55,6 @@ public final class DirectoryUsers {
 
     users.add(user5);
     users.add(user6);
-
 
     // admin :
     // always=Jan. 1 this year to 2100
@@ -71,8 +74,7 @@ public final class DirectoryUsers {
         return user;
       }
     }
-    System.out.println("user with credential " + credential + " not found");
+    log.warn("User with credential {} not found", credential);
     return null; // otherwise we get a Java error
   }
-
 }

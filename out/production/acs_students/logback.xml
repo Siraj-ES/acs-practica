@@ -1,0 +1,46 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+
+        </encoder>
+        <file>activity.log</file>
+    </appender>
+
+    <!--MODE 1-->
+    <!--First milestone-->
+    <!--
+    <logger name="baseNoStates" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+
+    </logger>
+    -->
+
+
+    <!--MODE 2-->
+    <!--Second milestone-->
+    <!--
+    <logger name="baseNoStates.WebServer" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+    -->
+
+
+    <!--MODE 3-->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE"/>
+    </root>
+
+
+</configuration>

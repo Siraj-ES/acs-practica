@@ -1,68 +1,83 @@
 package baseNoStates;
 
 import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Unlocked_shortly extends DoorState implements Observer {
-    private int sec;
-    private Clock clock;
 
-    public Unlocked_shortly(Door door, Clock clock) {
-      super(door);
-      this.clock = clock;
-      this.clock.addObserver(this);
-      this.sec = 0;
-      Clock.getInstance().addObserver(this );
+  private static final Logger log =
+      LoggerFactory.getLogger(Unlocked_shortly.class);
 
-      name = States.UNLOCKED_SHORTLY;
-      LocalDateTime dateTimeUnlocked = LocalDateTime.now();
-      Clock.getInstance().addObserver(this);
-      System.out.println("Door " + this.door.getId() + " enters Unlocked shortly at " + dateTimeUnlocked);
-    }
+  private int sec;
+  private final Clock clock;
+
+  public Unlocked_shortly(Door door, Clock clock) {
+    super(door);
+    this.clock = clock;
+    this.clock.addObserver(this);
+    this.sec = 0;
+
+    name = States.UNLOCKED_SHORTLY;
+    LocalDateTime dateTimeUnlocked = LocalDateTime.now();
+
+    log.info(
+        "Door {} enters Unlocked shortly at {}",
+        door.getId(),
+        dateTimeUnlocked
+    );
+  }
 
   @Override
   public String getName() {
     return "unlocked_shortly";
   }
 
-
   @Override
-    public void open(){
-      door.setClosed(false);
-      System.out.println("Opening the door...");
+  public void open() {
+    door.setClosed(false);
+    log.info("Opening the door {}", door.getId());
   }
 
-    @Override
-    public void close(){
-      door.setClosed(true);
-      System.out.println("Closing the door");
+  @Override
+  public void close() {
+    door.setClosed(true);
+    log.info("Closing the door {}", door.getId());
+  }
+
+  @Override
+  public void lock() {
+    // nothing
+  }
+
+  @Override
+  public void unlock() {
+    // nothing
+  }
+
+  @Override
+  public void unlocked_shortly() {
+    // nothing
+  }
+
+  @Override
+  public void update() {
+    this.sec++;
+    if (sec > 9) {
+      if (door.isClosed()) {
+        door.setState(new Locked(door));
+        log.info(
+            "10 sec have passed and door {} was CLOSED → Locking...",
+            door.getId()
+        );
+      } else {
+        door.setState(new Propped(door));
+        log.warn(
+            "10 sec have passed and door {} was OPEN → Propped...",
+            door.getId()
+        );
+      }
+      clock.removeObserver(this);
     }
-
-    @Override
-    public void lock(){}
-
-    @Override
-    public void unlock(){}
-
-    @Override
-    public void unlocked_shortly(){}
-
-    @Override
-    public void propped(){}
-
-    @Override
-    public void update(){
-        this.sec++;
-        if(sec > 9) {
-          if (door.isClosed()) {
-            door.setState(new Locked(door));
-            System.out.println("10 sec have passed and the door was closed so Locking...");
-          }
-          else{
-            door.setState(new Propped(door));
-            System.out.println("10 sec have passed and the door was opened so Propped...");
-          }
-          clock.removeObserver(this);
-
-        }
-    }
+  }
 }

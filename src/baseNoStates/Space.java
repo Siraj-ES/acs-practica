@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class Space extends Area {
+public class Space extends Area {
 
   public Space(String id) {
     super(id);
@@ -13,19 +13,21 @@ class Space extends Area {
   @Override
   public void addArea(Area area) {}
 
-  //A door he implementat getters de from i to d'un space per a que en aquest metode si
-  //el space que li pasem per parametre es igual al space que te com a to la porta, l'afegeixi
-  //a l'array doorsArea i retornar totes les portes d'aquella mateixa area.
+  //In the Door class, I implemented getters for the "from" and "to" spaces so that in this method,
+  //if the space passed as a parameter is equal to the space that the door has as its “to” space,
+  //it adds the door to the doorsArea array and returns all the doors from that same area.
+
   @Override
   public List<Door> getDoorsGivingAccess() {
-    ArrayList<Door> doorsArea = new ArrayList<>();
-    for (Door door : DirectoryDoors.getAllDoors()) {
-      if (this.getId().equals(door.getTo())){
-        doorsArea.add(door);
-      }
-    }
-    return doorsArea;
+    GetDoorsGivingAcces v = new GetDoorsGivingAcces();
+    accept(v);
+    return v.getDoors();
 
+  }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visitSpace(this);
   }
 
 }
